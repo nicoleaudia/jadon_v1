@@ -7,9 +7,9 @@ by students
 
 from tutor import Tutor
 
-assistant_id = None
-module_name = "Operations Management"
-teaching_level = "university"
+assistant_id = None # we would keep this in a database ordinarily
+module_name = "Operations Management" # input text filed
+teaching_level = "university" # radio buttons (pre-selected)
 
 def powerpointUploaded():
     return False
@@ -22,11 +22,13 @@ def uploadFiles(tutor):
         tutor.upload_file("slides.pptx")
     if textbookUploaded(): 
         tutor.upload_file("textbook.pdf")
-    
 
-def main():
+# Called when teacher wishes to create an assistant
+def create_assistant():
+    # Get teacher to upload desired files
     tutor = Tutor()
     uploadFiles(tutor)
+    # Create assistant when required
     if assistant_id != None: tutor.set_assistant(assistant_id)
     else: assistant_id = tutor.create_assistant(teaching_level=teaching_level, module_name=module_name)
 

@@ -2,6 +2,7 @@
 
 from openai import OpenAI
 from dotenv import load_dotenv
+import time
 
 class Tutor:
 
@@ -10,6 +11,8 @@ class Tutor:
         self.bot = OpenAI() # defaults to using os environ variables OPENAI_API_KEY
         self.file_ids = []
         self.assistant = None
+        self.thread = None # Conversation (thread) to assistant
+        self.run = None 
         
 
     # Uploads a powerpoint or textbook to OpenAI
@@ -41,10 +44,49 @@ class Tutor:
 
 
     def set_assistant(self, assistant_id):
-        self.assistant = assistant_id
+        self.assistant = self.bot.beta.assistants.retrieve(assistant_id)
 
-    def ask(self, message = "", message_type = "query"):
+    def start_thread(self):
+        if self.thread == None: 
+            self.thread = self.bot.beta.threads.create()
+
+    # Add message to Thread, and creates a Run
+    def ask(self, message = ""):
         if (self.assistant == None):
             print("Fatal Error! No assistant instance created!")
             return
-        # Ask Assistant question
+        
+        self.start_thread()
+        self.bot.beta.threads.messages.create(
+            thread_id=self.thread,
+            content=message
+        )
+        
+        self.run = self.bot.beta.threads.runs.create(
+            thread_id=self.thread.id,
+            assistant_id=self.assistant
+        )
+    
+    def retrieve_run(self):
+        if self.run == None:
+            print("Error! There is no run instance running!")
+            return None
+        
+        self.run = self.bot.beta.threads.runs.retrieve(
+            thread_id=self.thread.id, 
+            run_id=self.run.id
+        )
+        status = self.run.status
+        if status == 'cancelled' or status == 'expired' or status == 'failed' or status == 'cancelled':
+            print("Error! Run has not completed")
+            return None
+        
+        if self.run.status != 'completed':
+            time.sleep(200) # Sleep for some time then recursively call
+            return self.retrieve_run()
+        
+        messages = self.bot.beta.threads.messages.list(
+            thread_id=self.thread.id
+        )
+
+        return messages
