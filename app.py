@@ -15,7 +15,7 @@ openai_api_key = os.environ.get('OPENAI_API_KEY')
 app = Flask(__name__)
 
 # Define a route and a view function
-@app.route('/') #REMEMBER THIS IS TEST
+@app.route('/testtest')
 def hello_world():
     #client = OpenAI(api_key='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')
     client = OpenAI(api_key=openai_api_key)
@@ -33,7 +33,7 @@ def hello_world():
 
 
 
-@app.route('/testtest')
+@app.route('/')
 def index():
     return render_template('index.html')
 
