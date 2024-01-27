@@ -62,7 +62,3 @@ fi
 # past commands the $PATH changes we made may not be respected
 hash -r 2> /dev/null
 
-#export OPENAI_API_KEY=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
-#export OPENAI_API_KEY='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'
-
-

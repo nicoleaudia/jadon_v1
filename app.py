@@ -17,7 +17,6 @@ app = Flask(__name__)
 # Define a route and a view function
 @app.route('/testtest')
 def hello_world():
-    #client = OpenAI(api_key='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')
     client = OpenAI(api_key=openai_api_key)
 
     stream = client.chat.completions.create(

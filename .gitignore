@@ -1,5 +1,5 @@
 .venv
-
+.env
 
 # OS generated files
 .DS_Store # macOS folder settings
