@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}" />
+    <title>Thread Viewer</title>
+</head>
+<body>
+    <div id="content">
+        <div class="message">
+            {{ content|safe }}
+        </div>
+    </div>
+</body>
+</html>
+

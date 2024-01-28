@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify, make_response
 from openai import OpenAI
+import markdown2
 # from dotenv import load_dotenv
 import scripts.student as student
 
@@ -19,13 +20,16 @@ def index():
         student.run_user_bot(assistant_id)
         messages = student.ask_tutor(question)
 
-        response = make_response (
-            jsonify(
-                {"messages": messages}
-            )
-        )
+        html_content = markdown2.markdown("".join(messages))
+        return render_template('results.html', content=html_content)
 
-        return response
+        # response = make_response (
+        #     jsonify(
+        #         {"messages": messages}
+        #     )
+        # )
+
+        # return response
     return render_template('index.html')
 
 

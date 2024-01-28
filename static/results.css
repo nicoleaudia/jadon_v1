@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+#content {
+    width: 80%;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+#content h3 {
+    color: #333;
+    font-size: 1.2em;
+}
+
+#content p {
+    line-height: 1.5;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.message {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.author {
+    font-weight: bold;
+    color: #2a9d8f;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #content {
+        width: 95%;
+        padding: 10px;
+    }
+}
