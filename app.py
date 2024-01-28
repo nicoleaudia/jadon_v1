@@ -1,15 +1,11 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, make_response
 from openai import OpenAI
-from dotenv import load_dotenv
-import student
-import scripts.student
+# from dotenv import load_dotenv
+import scripts.student as student
 
-load_dotenv() 
+# load_dotenv() 
 
 assistant_id = 'asst_s1VW5o5OyeMfMF7qu9PK9SOt'
-
-#from teacher.py import (fxn name)
-
 
 # Create a Flask app instance
 app = Flask(__name__)
@@ -20,10 +16,16 @@ def index():
     if request.method == 'POST':
         question = request.form.get('message-input')
 
-        sr.run_user_bot(assistant_id)
-        response = student.ask_tutor(question)
+        student.run_user_bot(assistant_id)
+        messages = student.ask_tutor(question)
 
-        return jsonify({'response': response})
+        response = make_response (
+            jsonify(
+                {"messages": messages}
+            )
+        )
+
+        return response
     return render_template('index.html')
 
 

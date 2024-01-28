@@ -7,7 +7,7 @@ import time, os
 class Tutor:
 
     def __init__(self):
-        openai_api_key = os.environ.get('OPENAI_API_KEY')
+        openai_api_key = os.environ.get('OPENAI_API_KEYY')
         self.bot = OpenAI(api_key=openai_api_key)
         # load_dotenv()
         # self.bot = OpenAI() # defaults to using os environ variables OPENAI_API_KEY

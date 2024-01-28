@@ -3,9 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <!-- <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./index.css" /> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
-    
+
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap"
@@ -112,7 +115,7 @@
                       </div>
                       <div class="help-question-label">
                         <div class="hi-i-dont">
-                          Hi I don’t really understand how to use this formula:
+                          I don't understand what a distributed algorithm is. Could you explain it to me?
                         </div>
                       </div>
                     </div>
@@ -131,42 +134,35 @@
                       </div>
                       <div class="operations-management-frame1">
                         <div class="hi-owen-i-container">
-                          <p class="hi-owen-i">
+                          <!-- <p class="hi-owen-i">
                             Hi Owen! I can tell you what that means
                           </p>
-                          <p class="blank-line">&nbsp;</p>
+                          <p class="blank-line">&nbsp;</p> -->
                           <p class="based-on-the">
-                            Based on the blabla book, ...
+                                Hi Owen! Based on the textbook...
                           </p>
-                          <p class="blank-line1">&nbsp;</p>
+                          <!-- <p class="blank-line1">&nbsp;</p> -->
                           <p class="blank-line2">&nbsp;</p>
                           <p class="the-way-you">
-                            The way you can see it is ..
+                                a distributed algorithm is comprised of a collective set of automata,
                           </p>
-                          <p class="blank-line3">&nbsp;</p>
-                          <p class="see-more-on">
-                            See more on blabla book page ...
+                          <p class="blank-line2">&nbsp;</p>
+                          <p class="the-way-you">
+                                that collectively execute computations and communicate by exchanging messages across a network of computers or devices.
                           </p>
+                          <!-- <p class="blank-line2">&nbsp;</p> -->
+                          <!-- <p class="the-way-you">
+                          </p> -->
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <form id="chat-form" method="post">
-                    <input class="ask-away" type="text" id="chat-input" name="message-input" placeholder="Type your message here..." />
-                    <img class="send-icon" alt="" src="{{ url_for('static', filename='public/send.svg') }}" />
-                    <button type="submit">Send</button>
-                </form>
-                <!-- <div class="askaway-button">
-                  <div class="askaway-button-child"></div>
-                  <input class="ask-away" placeholder="Ask away!" type="text" />
-
-                  <div class="conversation-frame">
-                    <div class="conversation-frame-child"></div>
-                    <img class="send-icon" alt="" src="{{ url_for('static', filename='public/send.svg') }}" />
-
-                  </div>
-                </div> -->
+                  <input class="ask-away" type="text" id="chat-input" name="message-input" placeholder="Type your message here..." />
+                  <img class="send-icon" alt="" src="{{ url_for('static', filename='public/send.svg') }}" />
+                  <button type="submit">Send</button>
+              </form>
               </div>
             </div>
             <div class="rectangle-group">
