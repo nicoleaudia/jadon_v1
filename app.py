@@ -1,13 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from openai import OpenAI
 from dotenv import load_dotenv
-import os
-import sys
+import student
 
 load_dotenv() 
 
-openai_api_key = os.environ.get('OPENAI_API_KEY')
-# client = OpenAI(api_key=openai_api_key)
+assistant_id = 'asst_s1VW5o5OyeMfMF7qu9PK9SOt'
 
 #from teacher.py import (fxn name)
 
@@ -15,33 +13,16 @@ openai_api_key = os.environ.get('OPENAI_API_KEY')
 # Create a Flask app instance
 app = Flask(__name__)
 
-# Define a route and a view function
-@app.route('/testtest')
-def hello_world():
-    client = OpenAI(api_key=openai_api_key)
-
-    stream = client.chat.completions.create(
-        model="gpt-3.5-turbo-1106",
-        messages=[{"role": "user", "content": "Say this is a test"}],
-        stream=True,
-    )
-    s = ""
-    for chunk in stream:
-        if chunk.choices[0].delta.content is not None:
-            s += chunk.choices[0].delta.content
-    return s
-
-
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    global assistant_id
     if request.method == 'POST':
-        data = request.form.get('message-input')
-        print(data)
+        question = request.form.get('message-input')
 
-        # response = student.some_function(user_input)  # Replace with actual function call
+        student.run_user_bot(assistant_id)
+        response = student.ask_tutor(question)
 
-        # return jsonify({'response': response})
+        return jsonify({'response': response})
     return render_template('index.html')
 
 

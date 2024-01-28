@@ -19,12 +19,13 @@ def textbookUploaded():
 
 def uploadFiles(tutor):
     if powerpointUploaded(): 
-        tutor.upload_file("slides.pptx")
+        tutor.upload_file("scripts/files/slides.pdf")
     if textbookUploaded(): 
-        tutor.upload_file("textbook.pdf")
+        tutor.upload_file("scripts/files/textbook.pdf")
 
 # Called when teacher wishes to create an assistant
 def create_assistant():
+    global assistant_id, module_name, teaching_level
     # Get teacher to upload desired files
     tutor = Tutor()
     uploadFiles(tutor)
@@ -33,3 +34,7 @@ def create_assistant():
     else: assistant_id = tutor.create_assistant(teaching_level=teaching_level, module_name=module_name)
 
     print("Succesfully loaded assistant with id {}".format(assistant_id))
+
+
+if __name__=="__main__":
+    create_assistant()

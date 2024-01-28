@@ -37,7 +37,7 @@ class Tutor:
             name=assistant_name,
             instructions=assistant_prompt,
             tools=[{"type": "retrieval"}],
-            model="gpt-4",
+            model="gpt-4-turbo-preview",
             file_ids=self.file_ids
         )
         return self.assistant.id
@@ -58,13 +58,14 @@ class Tutor:
         
         self.start_thread()
         self.bot.beta.threads.messages.create(
-            thread_id=self.thread,
-            content=message
+            thread_id=self.thread.id,
+            content=message,
+            role='user'
         )
         
         self.run = self.bot.beta.threads.runs.create(
             thread_id=self.thread.id,
-            assistant_id=self.assistant
+            assistant_id=self.assistant.id
         )
     
     def retrieve_run(self):
@@ -76,17 +77,21 @@ class Tutor:
             thread_id=self.thread.id, 
             run_id=self.run.id
         )
+
+        print(self.run)
+        print("--"*10)
+
         status = self.run.status
         if status == 'cancelled' or status == 'expired' or status == 'failed' or status == 'cancelled':
             print("Error! Run has not completed")
             return None
         
         if self.run.status != 'completed':
-            time.sleep(200) # Sleep for some time then recursively call
+            time.sleep(1) # Sleep for some time then recursively call
             return self.retrieve_run()
         
         messages = self.bot.beta.threads.messages.list(
             thread_id=self.thread.id
         )
 
-        return messages
+        return messages.data
