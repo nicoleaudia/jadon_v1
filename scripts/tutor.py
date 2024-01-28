@@ -2,13 +2,15 @@
 
 from openai import OpenAI
 from dotenv import load_dotenv
-import time
+import time, os
 
 class Tutor:
 
     def __init__(self):
-        load_dotenv()
-        self.bot = OpenAI() # defaults to using os environ variables OPENAI_API_KEY
+        openai_api_key = os.environ.get('OPENAI_API_KEY')
+        self.bot = OpenAI(api_key=openai_api_key)
+        # load_dotenv()
+        # self.bot = OpenAI() # defaults to using os environ variables OPENAI_API_KEY
         self.file_ids = []
         self.assistant = None
         self.thread = None # Conversation (thread) to assistant

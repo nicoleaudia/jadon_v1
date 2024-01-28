@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from openai import OpenAI
 from dotenv import load_dotenv
 import student
+import scripts.student
 
 load_dotenv() 
 
@@ -19,7 +20,7 @@ def index():
     if request.method == 'POST':
         question = request.form.get('message-input')
 
-        student.run_user_bot(assistant_id)
+        sr.run_user_bot(assistant_id)
         response = student.ask_tutor(question)
 
         return jsonify({'response': response})
