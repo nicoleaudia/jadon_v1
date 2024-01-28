@@ -58,7 +58,7 @@
     color: var(--gray-500);
     text-align: left;
     display: inline-block;
-    min-width: 108px;
+    min-width: 200px;
     white-space: nowrap;
   }
   .frame-with-chevron,
@@ -371,7 +371,7 @@
     display: none;
   }
   .ask-away {
-    width: 71px;
+    width: 300px;
     border: 0;
     outline: 0;
     font-weight: 300;
@@ -622,6 +622,7 @@
     flex-direction: row;
     gap: 32px;
     color: var(--basic-700);
+    /* margin-left: -10px; */
   }
   .frame-with-chevron-and-operati {
     flex: 1;

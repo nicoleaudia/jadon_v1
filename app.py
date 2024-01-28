@@ -1,7 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
+import sys
 
 load_dotenv() 
 
@@ -32,9 +33,23 @@ def hello_world():
 
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
+    if request.method == 'POST':
+        data = request.form.get('message-input')
+        print(data)
+
+        # response = student.some_function(user_input)  # Replace with actual function call
+
+        # return jsonify({'response': response})
     return render_template('index.html')
+
+
+@app.route('/search', methods=['POST'])
+def search():
+    search_query = request.form['search_query']
+    # Process the search_query
+    return render_template('search_results.html', query=search_query)
 
 @app.route('/teacher')
 def teacher():
